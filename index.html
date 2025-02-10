@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Valentine</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        #container {
+            background-image: url(img/bg.avif);
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="font-['Poppins']">
+    <div id="container" class="h-screen flex justify-center items-center">
+        <div id="popup1" class="absolute transition-all">
+            <div class="flex flex-col text-white py-10 px-20 rounded-md gap-5 justify-center items-center bg-pink-500">
+                <p class="text-6xl w-20 h-20 flex bg-pink-700 rounded-full justify-center items-center ">!</p>
+                <p class="text-2xl font-semibold">Halo jihan</p>
+                <button id="button1" class="bg-pink-700 pointer py-2 px-6 rounded-md">Halo Gustit Ganteng</button>
+            </div>
+        </div>
+        <div id="popup2" class="absolute transition-all opacity-0 pointer-events-none">
+            <div class="flex flex-col text-white py-10 px-20 rounded-md gap-5 justify-center items-center bg-pink-500">
+                <p class="text-6xl w-20 h-20 flex bg-pink-700 rounded-full justify-center items-center ">!</p>
+                <p class="text-2xl flex font-semibold">Aku mau tanya</p>
+                <button id="button2" class="bg-pink-700 pointer py-2 px-6 rounded-md">Tanya apa ganteng</button>
+            </div>
+        </div>
+        <div id="message" class="flex transition-all flex-col opacity-0 pointer-events-none gap-5 justify-center items-center">
+            <video class="w-[300px]" src="animation/broke.webm" autoplay muted loop></video>
+            <p class="font-semibold">Kamu sayang aku nggaa??</p>
+            <div class="flex gap-5">
+                <button id="yes" class="bg-red-700 text-[25px] py-2 px-6 text-white rounded-lg cursor-pointer">Bangettt</button>
+                <button id="no" class="bg-orange-400 text-[25px] py-2 px-6 text-white rounded-lg cursor-pointer">G</button>
+            </div>
+        </div>
+    </div>
+    <audio id="audio" src="ssstik.io_1738465460278.mp3" autoplay loop ></audio>
+
+    <script>
+        const button1 = document.getElementById('button1')
+        const button2 = document.getElementById('button2')
+        const popup1 = document.getElementById('popup1')
+        const popup2 = document.getElementById('popup2')
+        const yes = document.getElementById('yes')
+        const no = document.getElementById('no')
+        let num = 0
+        const message = document.getElementById('message')
+
+        yes.addEventListener('click',() => {
+            location.href = 'index2.html'
+        })
+
+        no.addEventListener('click', () => {
+            if (num < 10) {
+                let newSize = 25 + (num + 1) * 25
+                yes.classList.remove(`text-[${25 + num * 25}px]`) 
+                yes.classList.add(`text-[${newSize}px]`) 
+                num++ 
+            }
+            console.log(num) 
+            localStorage['click'] = num
+        })
+
+        button1.addEventListener('click',() => {
+            popup1.classList.add('opacity-0')
+            popup1.classList.add('pointer-events-none')
+            let interval = setInterval(() => {
+                popup2.classList.remove('opacity-0')
+                popup2.classList.remove('pointer-events-none')
+                clearInterval(interval)
+            }, 500);
+        })
+
+        button2.addEventListener('click',() => {
+            popup2.classList.add('opacity-0')
+            popup2.classList.add('pointer-events-none')
+            let interval = setInterval(() => {
+                message.classList.remove('opacity-0')
+                message.classList.remove('pointer-events-none')
+                clearInterval(interval)
+            }, 500);
+        })
+    </script>
+</body>
+</html>

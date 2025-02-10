@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        #container {
+            background-image: url(img/bg.avif);
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div id="container" class="flex justify-center items-center h-screen">
+        <div class="flex flex-col gap-5 justify-center items-center">
+            <video class="w-[170px]" src="animation/calcu.webm" autoplay muted loop></video>
+            <p class="text-[19px] font-bold">Hitung Persentase Cinta Kamu</p>
+            <div class="flex justify-around gap-10">
+                <input id="input1" type="text" class="w-14 text-[19px] text-center" placeholder="'Gusti'">
+                <p class="text-4xl">💖</p>
+                <input id="input2" type="text" class="w-14 text-[19px] text-center" placeholder="'Jihan'" name="" id="">
+            </div>
+            <button id="calcu" class="bg-red-400 py-2 px-6 rounded-md font-semibold text-[19px]">Hitung</button>
+        </div>
+        <div id="popup1" class="absolute opacity-0 pointer-events-none transition-all">
+            <div class="flex flex-col text-white py-10 px-20 rounded-md gap-5 justify-center items-center bg-pink-500">
+                <p class="text-6xl w-20 h-20 flex bg-pink-700 rounded-full justify-center items-center ">!</p>
+                <p id="parag" class="text-[15px] flex items-center text-center justify-center font-semibold">Yang boleh cuma <br> Gusti & Jihan Doang</p>
+                <button id="button1" class="bg-pink-700 pointer py-2 px-6 rounded-md">Siap salah</button>
+            </div>
+        </div>
+        <div id="popup2" class="absolute opacity-0 pointer-events-none transition-all">
+            <div class="flex flex-col text-white py-10 px-20 rounded-md gap-5 justify-center items-center bg-pink-500">
+                <video src="animation/anima.webm" autoplay loop muted></video>
+                <p id="parag2" class="text-[15px] flex items-center text-center justify-center font-semibold"></p>
+                <p>Alamak Besar Sekali🥰🥰🥰</p>
+                <button id="button2" class="bg-pink-700 pointer py-2 px-6 rounded-md">Coba Lagi</button>
+            </div>
+        </div>
+        <audio id="audio" src="audio/Aku Milikmu - Dewa 19 (Lyrics Video) [OEjl0eHY1w8].mp3" autoplay loop></audio>
+        <audio id="beautifull" src="audio/beautifull.mp3" loop></audio>
+    </div>
+    <script>
+        const input1 = document.getElementById('input1')
+        const input2 = document.getElementById('input2')
+        const calcu = document.getElementById('calcu')
+        const alert1 = document.getElementById('popup1')
+        const button1 = document.getElementById('button1')
+        const button2 = document.getElementById('button2')
+        const parag = document.getElementById('parag')
+        const parag2 = document.getElementById('parag2')
+        const popup2 = document.getElementById('popup2')
+        const audio = document.getElementById('audio')
+        const beautifull = document.getElementById('beautifull')
+        const pasangan = ['Gusti','Jihan']
+
+        calcu.addEventListener('click',() => {
+            let value1 = input1.value.trim()
+            let value2 = input2.value.trim()
+            let randomNum = Math.floor(Math.random() * 10) + 90
+
+            if (value1.trim() == '' || value2.trim() == '') {
+                alert1.classList.remove('opacity-0')
+                alert1.classList.remove('pointer-events-none')
+                parag.innerHTML = 'Field Text Belum Diisi'
+            }else if (!pasangan.includes(value1) || !pasangan.includes(value2)) {
+                alert1.classList.remove('opacity-0')
+                alert1.classList.remove('pointer-events-none')
+                parag.innerHTML = 'Yang boleh cuma <br> Gusti & Jihan Doang'
+            }else if(pasangan.includes(value1) || pasangan.includes(value2)){
+                popup2.classList.remove('opacity-0')
+                popup2.classList.remove('pointer-events-none')
+                parag2.innerHTML = `Persentase Cinta Kamu <br> ${randomNum}%`
+                audio.pause()
+                beautifull.play()
+            }
+
+            button2.addEventListener('click', () => {
+                popup2.classList.add('opacity-0')
+                popup2.classList.add('pointer-events-none')
+                audio.play()
+                beautifull.pause()
+            })
+        })
+
+        button1.addEventListener('click',() => {
+            alert1.classList.add('opacity-0')
+            alert1.classList.add('pointer-events-none')
+        })
+
+    </script>
+</body>
+</html>
